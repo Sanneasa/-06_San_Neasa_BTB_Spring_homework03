@@ -17,6 +17,6 @@ public class EventResponse {
     private Integer eventId;
     private String eventName;
     private LocalDateTime eventDate;
-    private List<Venues> venuesList;
+    private List<Integer> venuesList;
     private  List<Integer> attendeesList;
 }

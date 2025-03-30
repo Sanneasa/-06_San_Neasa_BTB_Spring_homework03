@@ -28,9 +28,9 @@ public interface AttendeeRepository {
 
     @Select(
             """
-       select * from attendee 
-       offset #{page} * (#{size}-1)
-       limit #{size}
+       select * from attendee
+       offset #{size} *(#{page}-1)
+       limit #{size};
     """
     )
     @ResultMap("attendeeMapper")
@@ -48,6 +48,25 @@ public interface AttendeeRepository {
     )
     @ResultMap("attendeeMapper")
     AttendeeResponse getAttendeeByEventId(Integer eventId);
+
+
+    @Select(
+            """
+        delete  from event_attendee
+        where event_id = #{id}
+    """
+    )
+    void  deletedEventEndAttendee(Integer id);
+
+
+    @Select(
+            """
+      insert into event_attendee (event_id, attendee_id)
+      values(#{eventId}, #{attendeeId})
+      returning *
+    """
+    )
+    void  addEventAndAttendee(Integer eventId, Integer attendeeId);
 
 
     @Select(

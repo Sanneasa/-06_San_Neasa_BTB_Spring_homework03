@@ -8,8 +8,8 @@ import java.util.List;
 public interface VenuesRepository {
 
     @Select("""
-        INSERT INTO venues (venues_name, location,venues_id)
-        VALUES (#{request.venuesName}, #{request.location},#{request.venuesId})
+        INSERT INTO venues (venues_name, location)
+        VALUES (#{request.venuesName}, #{request.location})
         RETURNING *
     """)
     @Results(
@@ -25,7 +25,7 @@ public interface VenuesRepository {
 
     @Select(
             """
-      select * from venues 
+      select * from venues
       offset #{size} *(#{page}-1)
       limit #{size};
     """
